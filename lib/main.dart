@@ -46,16 +46,12 @@ class QuizPlay extends StatefulWidget {
 
 class _QuizplayState extends State<QuizPlay> {
   List<Icon> score=[];// array of score icon
-  // List<String> questions=[//questions
-  //   'Pakistan is an under developed country',
-  //   'Imran Khan is the Prime Minister of Pakistan',
-  //   'Y comes after U'
-  // ];
-  // List<bool> correctanswer=[//array of corect answers
-  //   true,true,false
-  // ];
+  List<Questions>questionsAndAnswers=[
+    Questions(a:'Pakistan is an under developed country',b:true),
+    Questions(a:'Imran Khan is the Prime Minister of Pakistan',b:true),
+    Questions(a:'Y comes after U',b:false)
+  ];
   int questiontracker=0;// varaible to increament of questions
-  Questions q1= Questions();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -68,7 +64,7 @@ class _QuizplayState extends State<QuizPlay> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                q1.questions[2],
+                questionsAndAnswers[questiontracker].ques,
                 style: TextStyle(
                   fontSize: 25.0,
                   color: Colors.white70,
@@ -77,73 +73,73 @@ class _QuizplayState extends State<QuizPlay> {
             ),
           ),
         ),
-        // Expanded(
-        //   child: Padding(
-        //     padding: EdgeInsets.all(10.0),
-        //     child: ElevatedButton(
-        //       style: ButtonStyle(
-        //         backgroundColor: MaterialStateProperty.all(Colors.green),
-        //       ),
-        //       onPressed: () {
-        //         //Yes button
-        //         bool answer=correctanswer[questiontracker];
-        //         if (answer==true)
-        //           {
-        //             print('correct answer');
-        //           }
-        //         else
-        //           {
-        //             print('wrong answer  ');
-        //           }
-        //         setState(() {
-        //           questiontracker++;
-        //           score.add(Icon(Icons.check,color: Colors.green,)) ;
-        //         });
-        //       },
-        //       child: Text(
-        //         'Yes',
-        //         style: TextStyle(
-        //           fontSize: 20.0,
-        //         ),
-        //       ),
-        //     ),
-        //   ),
-        // ),
-        // Expanded(
-        //   child: Padding(
-        //     padding: EdgeInsets.all(10.0),
-        //     child: ElevatedButton(
-        //       style: ButtonStyle(
-        //         backgroundColor: MaterialStateProperty.all(Colors.red),
-        //       ),
-        //       onPressed: () {
-        //         // No button
-        //         bool answer=correctanswer[questiontracker];
-        //         if (answer==false)
-        //         {
-        //           print('correct answer');
-        //         }
-        //         else
-        //         {
-        //           print('wrong answer  ');
-        //         }
-        //         setState(() {
-        //           questiontracker++;
-        //           score.add(Icon(Icons.close,color: Colors.red,)) ;
-        //         });
-        //       },
-        //       child: Text(
-        //         'No',
-        //         style: TextStyle(
-        //           fontSize: 20.0,
-        //         ),
-        //       ),
-        //     ),
-        //   ),
-        // ),
-        // Row(
-        //   children: score,
-        // ),
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.all(10.0),
+            child: ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.green),
+              ),
+              onPressed: () {
+                //Yes button
+                bool answer=questionsAndAnswers[questiontracker].ans;
+                if (answer==true)
+                  {
+                    print('correct answer');
+                  }
+                else
+                  {
+                    print('wrong answer  ');
+                  }
+                setState(() {
+                  questiontracker++;
+                  score.add(Icon(Icons.check,color: Colors.green,)) ;
+                });
+              },
+              child: Text(
+                'Yes',
+                style: TextStyle(
+                  fontSize: 20.0,
+                ),
+              ),
+            ),
+          ),
+        ),
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.all(10.0),
+            child: ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.red),
+              ),
+              onPressed: () {
+                // No button
+                bool answer=questionsAndAnswers[questiontracker].ans;
+                if (answer==false)
+                {
+                  print('correct answer');
+                }
+                else
+                {
+                  print('wrong answer  ');
+                }
+                setState(() {
+                  questiontracker++;
+                  score.add(Icon(Icons.close,color: Colors.red,)) ;
+                });
+              },
+              child: Text(
+                'No',
+                style: TextStyle(
+                  fontSize: 20.0,
+                ),
+              ),
+            ),
+          ),
+        ),
+        Row(
+          children: score,
+        ),
       ],
     );
   }
